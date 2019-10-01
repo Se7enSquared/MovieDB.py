@@ -1,3 +1,5 @@
+# todo: make menu into a class which can build a menu
+# todo: add comments
 class Movie:
     # creates a movie object which is a dictionare and appends it to a list
 
