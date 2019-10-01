@@ -1,4 +1,5 @@
 class Movie:
+    # creates a movie object which is a dictionare and appends it to a list
 
     movies = []
 
@@ -24,20 +25,33 @@ class Movie:
     def view_movie(self):
         print(self.__str__)
 
+
     @staticmethod
-    def find_movie(criteria, value):
+    def find_movie(criteria, value, operator=None):
 
         found_movies = []
+        if not operator:
+            for movie in Movie.movies:
+                if movie[criteria] == value:
+                    found_movies.append(movie)
+        elif operator == 'greater':
+            for movie in Movie.movies:
+                if movie[criteria] >= value:
+                    found_movies.append(movie)
 
-        for movie in Movie.movies:
-            if movie[criteria] == value:
-                found_movies.append(movie)
+            else:        
+                return found_movies
+        else:
+            for movie in Movie.movies:
+                if movie[criteria] <= value:
+                    found_movies.append(movie)
 
         if len(found_movies) == 0:
             print('Movie not found')
         else:        
             return found_movies
-    
+
+
     @staticmethod
     def delete_movie(title):
         for i in range(len(Movie.movies)):
@@ -49,7 +63,8 @@ class Movie:
 
     def __str__(self):
         return 'Title: ' + self.title + '\nGenre: ' + self.genre + '\nYear: ' + self.year +\
-            '\nDuration: ' + str(self.duration_in_mins) + '\nSeen: ' + str(self.seen) + '\nYour Rating: ' + str(self.rating)
+            '\nDuration: ' + str(self.duration_in_mins) + '\nSeen: ' + str(self.seen) + \
+            '\nYour Rating: ' + str(self.rating)
 
 
 def menu_choice():
@@ -80,25 +95,62 @@ def add_movie():
     rating = input('Rating (decimal value from 1.0 - 5.0 or leave blank if haven\'t seen): ')
 
     new_movie = Movie(title, genre, year, duration_in_mins, seen, rating)
-    print(new_movie)
-    print('\n*************\nMovie Added:\n')
+    print('\n*************\nMovie Added:\n\n') 
     print(new_movie)
 
 
 def search_for_movie():
     
     criteria_dict = {1: 'title', 2: 'genre', 3: 'year', 4: 'duration_in_minutes', 5: 'seen', 6: 'rating'}
-    criteria = int(input('What do you want to search by:\n1. Title\n2. Genre\n3. Year\n4. Duration\n5.Seen\n6.Rating'))
-    if criteria == 1:
-        title = input('Enter the exact title of the movie: ')
-        found_movies = Movie.find_movie(criteria_dict[criteria], title)
+    special_search = False
+    
+    criteria = ''
+    value = ''
+    
+    while criteria not in range(1, 7):
+         
+        criteria = int(input('What do you want to search by:\n1. Title\n2. Genre\n3. Year\n4. Duration\n5.Seen\n6.Rating\n'))
 
-    if len(found_movies) > 0:
-        print('\n\n' + str(len(found_movies)) + ' movie(s) found!\n')
-        print('The following movies meet your criteria: ')
-    for movie in found_movies:
-        for key, value in movie.items():
-            print(key.title() + ': '+ value)
+        if criteria == 1:
+            operator = None
+            value = input('Enter the exact title of the movie: ')
+        elif criteria == 2:
+            operator = None
+            value = input('Enter the genre you want to search for: ')
+
+        elif criteria == 3:
+            search_type = ''
+            while search_type not in range(1, 4):
+                search_type = int(input('Would you like to search for: \n1. Specific year\n2. Newer than\n3. Older than\n'))
+
+                if search_type == 1:
+                    operator = None
+                    value = input('Enter the year you\'d like to search for:' )
+                elif search_type == 2:
+                    special_search = True
+                    operator = 'greater'
+                    value = input('Enter the year earliest year (returns years >= that year):' )
+                elif search_type == 3:
+                    special_search = True
+                    operator = 'lesser'
+                    value = input('Enter the latest year: (returns years <= that year)')
+                else:
+                    print('Invalid sub-criteria selected')
+        else:
+            print('Invalid selection')
+            
+        if special_search:
+            found_movies = Movie.find_movie(criteria_dict[criteria], value, operator)
+        else:
+            found_movies = Movie.find_movie(criteria_dict[criteria], value)
+
+        if len(found_movies) > 0:
+            print('\n\n' + str(len(found_movies)) + ' movie(s) found!\n')
+            print('The following movies meet your criteria: ')
+        for movie in found_movies:
+            for key, value in movie.items():
+                print(key.title() + ': '+ value)
+            print('')
 
 
 def delete_movie():
@@ -119,6 +171,7 @@ if __name__ == "__main__":
         main_menu()
 
         choice = menu_choice()
+
         if choice == 1:
            add_movie()
 
@@ -130,9 +183,10 @@ if __name__ == "__main__":
         else:
             print('Invalid choice')
         
-        continue_app = input('Do you want another operation? y/n')
+        continue_app = input('\n\nDo you want another operation? y/n')
 
         if continue_app[0].lower() == 'y':
             continue_app
         else:
             break
+        
