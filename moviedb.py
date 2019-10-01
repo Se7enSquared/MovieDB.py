@@ -38,8 +38,14 @@ class Movie:
         else:        
             return found_movies
     
-    def delete_movie(self):
-        pass
+    @staticmethod
+    def delete_movie(title):
+        for i in range(len(Movie.movies)):
+            if Movie.movies[i]['title'] == title:
+                del Movie.movies[i]
+                print(title + ' was deleted from the database')
+            else:
+                print(title + ' was not found in the database. Check the title name and try again.')
 
     def __str__(self):
         return 'Title: ' + self.title + '\nGenre: ' + self.genre + '\nYear: ' + self.year +\
@@ -80,18 +86,24 @@ def add_movie():
 
 
 def search_for_movie():
+    
     criteria_dict = {1: 'title', 2: 'genre', 3: 'year', 4: 'duration_in_minutes', 5: 'seen', 6: 'rating'}
     criteria = int(input('What do you want to search by:\n1. Title\n2. Genre\n3. Year\n4. Duration\n5.Seen\n6.Rating'))
     if criteria == 1:
         title = input('Enter the exact title of the movie: ')
         found_movies = Movie.find_movie(criteria_dict[criteria], title)
-    print('\n\n' + str(len(found_movies)) + ' movie(s) found!\n')
+
     if len(found_movies) > 0:
+        print('\n\n' + str(len(found_movies)) + ' movie(s) found!\n')
         print('The following movies meet your criteria: ')
     for movie in found_movies:
         for key, value in movie.items():
             print(key.title() + ': '+ value)
 
+
+def delete_movie():
+    title = input('What movie do you want to delete? (Type the whole title exactly as it is found in the database): ')
+    Movie.delete_movie(title)
 
 def main_menu():
     print('Welcome to your movie Database')
@@ -113,8 +125,10 @@ if __name__ == "__main__":
         elif choice == 2:
             search_for_movie()
             
+        elif choice == 3:
+            delete_movie()
         else:
-            delete_movie(title)
+            print('Invalid choice')
         
         continue_app = input('Do you want another operation? y/n')
 
