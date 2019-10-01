@@ -60,9 +60,19 @@ def menu_choice():
     return choice
 
 
-def add_movie(title, genre, year, duration_in_mins, seen=False, rating=None):
+def add_movie():
+    title = input('Title: ')
+    genre = input('Genre: ')
+    year = input('Year: ')
+    duration_in_mins = input('Duration in Minutes: ')
+    seen = input('Seen (True or False): ').title()
+    rating = input('Rating (decimal value from 1.0 - 5.0 or leave blank if haven\'t seen): ')
+
+    new_movie = Movie(title, genre, year, duration_in_mins, seen, rating)
+    print(new_movie)
     print('\n*************\nMovie Added:\n')
-    return Movie(title, genre, year, duration_in_mins, seen, rating)
+    print(new_movie)
+
 
 def search_for_movie():
     criteria_dict = {1: 'title', 2: 'genre', 3: 'year', 4: 'duration_in_minutes', 5: 'seen', 6: 'rating'}
@@ -79,28 +89,22 @@ def search_for_movie():
             print(key.title() + ': '+ value)
 
 
+def main_menu():
+    print('Welcome to your movie Database')
+    print('Choose an option:')
+    print('1 - Add movie')
+    print('2 - View existing movie')
+    print('3 - Delete a movie from the database')
+
 
 if __name__ == "__main__":
 
     while True:
-        print('Welcome to your movie Database')
-        print('Choose an option:')
-        print('1 - Add movie')
-        print('2 - View existing movie')
-        print('3 - Delete a movie from the database')
+        main_menu()
 
-        # Title, genre, year, duration_in_mins, seen=False, rating=Non
         choice = menu_choice()
         if choice == 1:
-            title = input('Title: ')
-            genre = input('Genre: ')
-            year = input('Year: ')
-            duration_in_mins = input('Duration in Minutes: ')
-            seen = input('Seen (True or False): ').title()
-            rating = input('Rating (decimal value from 1.0 - 5.0 or leave blank if haven\'t seen): ')
-
-            new_movie = add_movie(title, genre, year, duration_in_mins, seen, rating)
-            print(new_movie)
+           add_movie()
 
         elif choice == 2:
             search_for_movie()
