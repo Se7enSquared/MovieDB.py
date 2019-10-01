@@ -1,8 +1,6 @@
 class Movie:
 
     movies = []
-    
-    [{1: 's', 2: '3'}, {}]
 
     def __init__(self, title, genre, year, duration_in_mins, seen=False, rating=None):
  
