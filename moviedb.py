@@ -2,7 +2,10 @@ class Movie:
 
     movies = []
     
+    [{1: 's', 2: '3'}, {}]
+
     def __init__(self, title, genre, year, duration_in_mins, seen=False, rating=None):
+ 
         movie = {}
         self.title = title
         self.genre = genre
@@ -23,7 +26,7 @@ class Movie:
     def view_movie(self):
         print(self.__str__)
 
-
+    @staticmethod
     def find_movie(criteria, value):
 
         found_movies = []
@@ -36,8 +39,7 @@ class Movie:
             print('Movie not found')
         else:        
             return found_movies
-            
-
+    
     def delete_movie(self):
         pass
 
@@ -62,6 +64,11 @@ def menu_choice():
 
 def add_movie():
     title = input('Title: ')
+    if len(Movie.movies) > 0:
+        for movie in Movie.movies:
+            if movie['title'] == title:
+                print('That movie is already in the database!')
+                return
     genre = input('Genre: ')
     year = input('Year: ')
     duration_in_mins = input('Duration in Minutes: ')
@@ -80,7 +87,6 @@ def search_for_movie():
     if criteria == 1:
         title = input('Enter the exact title of the movie: ')
         found_movies = Movie.find_movie(criteria_dict[criteria], title)
-
     print('\n\n' + str(len(found_movies)) + ' movie(s) found!\n')
     if len(found_movies) > 0:
         print('The following movies meet your criteria: ')
