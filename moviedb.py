@@ -184,8 +184,8 @@ def perform_special_search(type):
     while search_type not in range(1, 4):
         if type == 'year':
             search_type = int(input('Would you like to search for: \n'
-                              '1. Specific year\n2. Newer than\n\'
-                              '3. Older than\n'))''
+                                    '1. Specific year\n2. Newer than\n'
+                                    '3. Older than\n'))
         elif type == 'duration':
             search_type = int(input('Would you like to search for: \n'
                                     '1. Specific duration\n2. Longer than\n'
