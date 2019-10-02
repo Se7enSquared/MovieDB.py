@@ -3,7 +3,7 @@
 
 
 class Movie:
-    # creates a movie object which is a dictionare and appends it to a list
+    # creates a movie object (dictionary) and appends it to a list
 
     movies = []
 
@@ -32,6 +32,12 @@ class Movie:
 
     @staticmethod
     def find_movie(criteria, value, operator=None):
+        '''
+        Handles searches through the movie list
+        appends movies that are found to a list
+        if movie is not found, displays message
+        if found, returns list of found movies
+        '''
 
         found_movies = []
         if not operator:
@@ -57,21 +63,31 @@ class Movie:
 
     @staticmethod
     def delete_movie(title):
+        '''
+        removes a movie dictionary object from the list of movies
+        in the 'Movie' class
+        '''
         for i in range(len(Movie.movies)):
             if Movie.movies[i]['title'] == title:
                 del Movie.movies[i]
                 print(title + ' was deleted from the database')
             else:
-                print(title + ' was not found in the database. Check the title \
-                      name and try again.')
+                print(title + ' was not found in the database. Check the title '
+                      'name and try again.')
 
     def __str__(self):
         return 'Title: ' + self.title + '\nGenre: ' + self.genre + '\nYear: ' \
                 + self.year + '\nDuration: ' + str(self.duration_in_mins) + \
-                '\nSeen: ' + str(self.seen) + '\nYour Rating: ' + str(self.rating)
+                '\nSeen: ' + str(self.seen) + '\nYour Rating: ' + \
+                str(self.rating)
 
 
 def menu_choice():
+    '''
+    Collects the user's choice from the menu.
+    ToDo: Turn into a class for handling all menus
+    in the application
+    '''
     while True:
         try:
             choice = int(input('What do you want to do? (1, 2, 3): '))
@@ -86,6 +102,10 @@ def menu_choice():
 
 
 def add_movie():
+    '''
+    Adds a movie object based on user input
+    Then prints the movie back to the user
+    '''
     title = input('Title: ')
     if len(Movie.movies) > 0:
         for movie in Movie.movies:
@@ -104,6 +124,13 @@ def add_movie():
 
 
 def search_for_movie():
+    '''
+    searches for a movie in the database
+    based on criteria given by the user.
+    Certain criteria may include an operator
+    (<= >=) and those are handled here and passed
+    to the perform_special_search function
+    '''
     criteria_dict = {1: 'title', 2: 'genre', 3: 'year',
                      4: 'duration_in_mins', 5: 'seen', 6: 'rating'}
     special_search = False
@@ -114,7 +141,8 @@ def search_for_movie():
     while criteria not in range(1, 7):
 
         criteria = int(
-            input('What do you want to search by: \n1. Title\n2. Genre\n3. Year\n4. Duration\n5.Seen\n6.Rating\n'))
+            input('What do you want to search by: \n1. Title\n2. Genre\n'
+                  '3. Year\n4. Duration\n5.Seen\n6.Rating\n'))
 
         if criteria == 1:
             operator = None
@@ -125,7 +153,8 @@ def search_for_movie():
         elif criteria == 3:
             value, operator, special_search = perform_special_search('year')
         elif criteria == 4:
-            value, operator, special_search = perform_special_search('duration')
+            value, operator, special_search\
+                 = perform_special_search('duration')
         else:
             print('Invalid selection')
 
@@ -145,12 +174,22 @@ def search_for_movie():
 
 
 def perform_special_search(type):
+    '''
+    Handles all searches which require an operator
+    (>= <=). sets the value, operator, and special_search
+    variables and returns them as a tuple
+    '''
+
     search_type = ''
     while search_type not in range(1, 4):
         if type == 'year':
-            search_type = int(input('Would you like to search for: \n1. Specific year\n2. Newer than\n3. Older than\n'))
+            search_type = int(input('Would you like to search for: \n'
+                              '1. Specific year\n2. Newer than\n\'
+                              '3. Older than\n'))''
         elif type == 'duration':
-            search_type = int(input('Would you like to search for: \n1. Specific duration\n2. Longer than\n3. Shorter than\n'))
+            search_type = int(input('Would you like to search for: \n'
+                                    '1. Specific duration\n2. Longer than\n'
+                                    '3. Shorter than\n'))
 
         if search_type == 1:
             operator = None
@@ -158,22 +197,32 @@ def perform_special_search(type):
         elif search_type == 2:
             special_search = True
             operator = 'greater'
-            value = input('Enter the lowest ' + type + ' (returns' + type + '>= that ' + type +'):')
+            value = input('Enter the lowest ' + type + ' (returns' + type +
+                          '>= that ' + type + '):')
         elif search_type == 3:
             special_search = True
             operator = 'lesser'
-            value = input('Enter the latest year: (returns years <= that year)')
+            value = input('Enter the latest year: '
+                          '(returns years <= that year)')
         else:
             print('Invalid sub-criteria selected')
     return value, operator, special_search
 
 
 def delete_movie():
-    title = input('What movie do you want to delete? (Type the whole title exactly as it is found in the database): ')
+    '''
+    User interface to remove a movie from the database
+    '''
+    title = input('What movie do you want to delete? (Type the whole title'
+                  'exactly as it is found in the database): ')
     Movie.delete_movie(title)
 
 
 def main_menu():
+    '''
+    Prints the main menu
+    Should be a part of the planned Menu class
+    '''
     print('Welcome to your movie Database')
     print('Choose an option:')
     print('1 - Add movie')
