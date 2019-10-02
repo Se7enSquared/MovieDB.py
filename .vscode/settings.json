@@ -1,7 +1,7 @@
 {
-    "python.pythonPath": "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\Python37_64\\python.exe",
-    "python.linting.enabled": true,
+    "python.pythonPath": "C:\\Users\\gray\\AppData\\Local\\Programs\\Python\\Python37-32\\python.exe",
     "python.linting.pylintEnabled": false,
-    "python.linting.flake8Enabled": false,
-    "python.linting.pep8Enabled": true
+    "python.linting.pep8Enabled": false,
+    "python.linting.enabled": true,
+    "python.linting.banditEnabled": true
 }

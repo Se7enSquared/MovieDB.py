@@ -12,7 +12,7 @@ class MovieCollection:
         if len(self.movies) > 0:            
             for movie in movies:
                 if movie['title'] == title:
-                    print('That movie is already in the database!')
+                    print('That movie is already in the database!\n')
                     return True
         return False
 
@@ -43,7 +43,7 @@ class MovieCollection:
                     found_movies.append(movie)
 
         if not found_movies:
-            print('\nMovie not found')
+            print('\nMovie not found\n')
         else:
             return found_movies
 
@@ -54,10 +54,10 @@ class MovieCollection:
         for i in range(len(self.movies)):
             if self.movies[i]['title'] == title:
                 del self.movies[i]
-                print(title + ' was deleted from the database')
+                print(title + ' was deleted from the database\n')
             else:
                 print(title + ' was not found in the database. Check the title'
-                      ' name and try again.')
+                      ' name and try again.\n')
 
     def __str__(self):
         for movie in self.movies:
