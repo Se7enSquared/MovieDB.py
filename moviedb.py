@@ -162,7 +162,7 @@ if __name__ == "__main__":
     while True:
 
         main_menu = Menu.Menu({'1': 'Add movie', '2': 'Find Movie',
-                               '3': 'Delete Movie\n\n'}, start_message='\n'
+                               '3': 'Delete Movie', '4': 'View Collection\n\n'}, start_message='\n'
                               '******************************\n'
                               'Welcome to your movie Database\n')
         main_menu.show_menu()
@@ -175,7 +175,10 @@ if __name__ == "__main__":
             search_for_movie(movie_collection)
 
         elif choice == 3:
-            delete_movie(movie_collection)      
+            delete_movie(movie_collection)
+        
+        elif choice == 4:
+            movie_collection.__str__()    
         else:
             print('Invalid input')
 

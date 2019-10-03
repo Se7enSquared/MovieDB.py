@@ -10,7 +10,7 @@ class MovieCollection:
     def movie_exists(self, title):
 
         if len(self.movies) > 0:            
-            for movie in movies:
+            for movie in self.movies:
                 if movie['title'] == title:
                     print('That movie is already in the database!\n')
                     return True
@@ -59,10 +59,11 @@ class MovieCollection:
                 print(title + ' was not found in the database. Check the title'
                       ' name and try again.\n')
 
+
     def __str__(self):
         for movie in self.movies:
-            return '\nTitle: ' + self.movies['title'] + '\nGenre: ' + \
-                    self.movies['genre'] + '\nYear: ' + self.movies['year'] + \
-                    '\nDuration: ' + str(self.movies['duration_in_mins']) + \
-                    '\nSeen: ' + str(self.movies['seen']) + '\nYour Rating: ' \
-                    + str(self.movies['rating'])
+            print('\nTitle: ' + movie['title'] + '\nGenre: ' + \
+                  movie['genre'] + '\nYear: ' + movie['year'] + \
+                  '\nDuration: ' + str(movie['duration_in_mins']) + \
+                  '\nSeen: ' + str(movie['seen']) + '\nYour Rating: ' \
+                  + str(movie['rating']))
