@@ -21,7 +21,8 @@ def create_movie(movie_collection):
     new_movie = Movie.Movie(movie_collection, title, genre, year, 
                             duration_in_mins, seen, rating)
     
-    print('\n*************\nMovie Added:\n\n\n' + new_movie)
+    print('\n*************\nMovie Added:\n\n\n')
+    print(new_movie)
 
 
 def search_for_movie(movie_collection):
@@ -89,43 +90,56 @@ def search_for_movie(movie_collection):
 
 
 def perform_special_search(type):
-    '''
-    Handles all searches which require an operator
+    
+    ''' Handles all searches which require an operator
     (>= <=). sets the value, operator, and special_search
-    variables and returns them as a tuple
-    '''
+    variables and returns them as a tuple '''
 
     search_type = ''
     while search_type not in range(1, 4):
+        
         if type == 'year':
-            search_type = int(input('Would you like to search for: \n'
-                                    '1. Specific year\n2. Newer than\n'
-                                    '3. Older than\n'))
+            year_menu = Menu.Menu({'1': 'Specific year', '2': 'Newer than',
+                                   '3': 'Older than'}, start_message='\nWould you'
+                                   'like to search for: \n')
+            year_menu.show_menu()
+            search_type = int(input())
+            
         elif type == 'duration':
-            search_type = int(input('Would you like to search for: \n'
-                                    '1. Specific duration\n2. Longer than\n'
-                                    '3. Shorter than\n'))
+            duration_menu = Menu.Menu({'1': 'Specific duration', '2': 'Longer than',
+                                   '3': 'Shorter than'}, start_message='\nWould you'
+                                   'like to search for: \n')
+            duration_menu.show_menu()
+            search_type = int(input())
+            
         elif type == 'rating':
-            search_type = int(input('Would you like to search for: \n'
-                                    '1. Specific rating\n2. Higher than\n'
-                                    '3. Lower than\n'))
+            rating_menu = Menu.Menu({'1': 'Specific rating', '2': 'Higher than',
+                                   '3': 'Lower than'}, start_message='\nWould you'
+                                   'like to search for: \n')
+            rating_menu.show_menu()
+            search_type = int(input())
 
 
         if search_type == 1:
             operator = None
             value = input('Enter the ' + type + 'you\'d like to search for:')
+            
         elif search_type == 2:
             special_search = True
             operator = 'greater'
             value = input('Enter the lowest ' + type + ' (returns' + type +
                           '>= that ' + type + '):')
+            
         elif search_type == 3:
             special_search = True
             operator = 'lesser'
             value = input('Enter the latest year: '
                           '(returns years <= that year)')
+            
         else:
             print('Invalid sub-criteria selected\n')
+            
+            
     return value, operator, special_search
 
 
