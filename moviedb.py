@@ -5,15 +5,10 @@ import MovieCollection as mc
 import Movie
 import Menu
 
-
-
-
-
 def create_movie(movie_collection):
-    '''
-    gets movie information from the user before passing it to
-    the add_movie function of the MovieCollection class
-    '''
+    ''' gets movie information from the user before passing it to
+    the add_movie function of the MovieCollection class '''
+    
     title = input('Title: ')
     if movie_collection.movie_exists(title):
         return
@@ -25,34 +20,37 @@ def create_movie(movie_collection):
 
     new_movie = Movie.Movie(movie_collection, title, genre, year, 
                             duration_in_mins, seen, rating)
-    print('\n*************\nMovie Added:\n\n')
-    print(new_movie)
+    
+    print('\n*************\nMovie Added:\n\n\n' + new_movie)
 
 
 def search_for_movie(movie_collection):
-    '''
-    searches for a movie in the database
+    ''' searches for a movie in the database
     based on criteria given by the user.
     Certain criteria may include an operator
     (<= >=) and those are handled here and passed
-    to the perform_special_search function
-    '''
+    to the perform_special_search function '''
+    
+    # finds the correct dictionary key in the movie collection based
+    # on the number the user inputs
     criteria_dict = {1: 'title', 2: 'genre', 3: 'year',
                      4: 'duration_in_mins', 5: 'seen', 6: 'rating'}
+    
+    # a special_search is a search where an operator is needed (such as 
+    # finding all movies longer than 2 hours)
     special_search = False
-
     criteria = ''
     value = ''
 
     while criteria not in range(1, 7):
 
+        # Construct a new menu object
         criteria_menu = Menu.Menu({'1': 'Title', '2': 'Genre', '3': 'Year', 
                                    '4': 'Duration', '5': 'Seen', '6': 
-                                   'rating'})
+                                   'rating'}, start_message="What do you want to search by: ")
+        criteria_menu.show_menu()
+        criteria = int(input())
         
-        criteria = int(
-            input('What do you want to search by: \n1. Title\n2. Genre\n'
-                  '3. Year\n4. Duration\n5.Seen\n6.Rating\n'))
 
         if criteria == 1:
             operator = None
@@ -83,6 +81,7 @@ def search_for_movie(movie_collection):
         if found_movies:
             print('\n\n' + str(len(found_movies)) + ' movie(s) found!\n')
             print('The following movies meet your criteria: ')
+            
             for movie in found_movies:
                 for key, value in movie.items():
                     print(key.title() + ': ' + value)
