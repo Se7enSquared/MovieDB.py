@@ -1,7 +1,7 @@
 # todo: make menu into a class which can build a menu
 # todo: add comments
 
-import MovieCollection
+import MovieCollection as mc
 import Movie
 import Menu
 
@@ -79,6 +79,11 @@ def search_for_movie(movie_collection):
         elif criteria == 4:
             value, operator, special_search\
                  = perform_special_search('duration')
+        elif criteria == 5:
+            operator = None
+            value = input('Seen (yes) or not (no): ')
+        elif criteria ==  6:
+            value, operator, special_search = perform_special_search('rating')
         else:
             print('Invalid selection')
 
@@ -115,6 +120,11 @@ def perform_special_search(type):
             search_type = int(input('Would you like to search for: \n'
                                     '1. Specific duration\n2. Longer than\n'
                                     '3. Shorter than\n'))
+        elif type == 'rating':
+            search_type = int(input('Would you like to search for: \n'
+                                    '1. Specific rating\n2. Higher than\n'
+                                    '3. Lower than\n'))
+
 
         if search_type == 1:
             operator = None
@@ -147,7 +157,7 @@ def delete_movie(movie_collection):
 if __name__ == "__main__":
     
     # init new list of movies
-    movie_collection = MovieCollection.MovieCollection()
+    movie_collection = mc.MovieCollection()
     
     while True:
 
