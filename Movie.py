@@ -16,7 +16,7 @@ class Movie:
         movie['title'] = self.title
         movie['genre'] = self.genre
         movie['year'] = self.year
-        movie['duration_in_mins'] = self.duration_in_mins
+        movie['duration_in_mins'] = duration_in_mins
         movie['seen'] = self.seen
         movie['rating'] = self.rating
 
@@ -30,6 +30,6 @@ class Movie:
 
     def __str__(self):
         return 'Title: ' + self.title + '\nGenre: ' + self.genre + '\nYear: ' \
-                + self.year + '\nDuration: ' + str(self.duration_in_mins) + \
-                '\nSeen: ' + str(self.seen) + '\nYour Rating: ' + \
+                + str(self.year) + '\nDuration: ' + str(self.duration_in_mins) + \
+                '\nSeen: ' + self.seen + '\nYour Rating: ' + \
                 str(self.rating)

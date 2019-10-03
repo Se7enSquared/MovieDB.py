@@ -13,10 +13,49 @@ def create_movie(movie_collection):
     if movie_collection.movie_exists(title):
         return
     genre = input('Genre: ')
-    year = input('Year: ')
-    duration_in_mins = input('Duration in Minutes: ')
-    seen = input('Seen (y/n): optional').title()
-    rating = input('Rating (optional 1.0 - 5.0): ')
+    
+    # get year and validate input is a 4 digit number
+    while True:
+        year = input('Year: ')
+        if len(year) != 4:
+            print('\nYear must be a 4 digit number')
+        elif not year.isdigit():
+            print('\nYear must be numeric')
+        else:
+            break
+    try: 
+        year = int(year)
+    except: 
+        print('\nMust be an integer')
+    
+    # get duration and verify input is numeric
+    while True:
+        duration_in_mins = input('Duration (mins): ')
+        try: 
+            duration_in_mins = int(duration_in_mins)
+            break
+        except: 
+            print('\nMust be an integer')
+    
+     # get seen and verify input is yes or no
+    while True:
+        seen = input('Seen (yes/no): ').title()
+        if seen in ['Yes', 'No']:
+            break
+        else: 
+            print('\nPlease type Yes or No')
+    rating = ''
+    while True:
+        try: 
+            rating = int(input('Rating 1-5 (optional): '))
+        except:
+            print('Must be an integer')
+            
+        if rating in range(1, 6) or rating == None:
+            break
+        else:
+            print('\nRating must be a number between 1 & 5')
+   
 
     new_movie = Movie.Movie(movie_collection, title, genre, year, 
                             duration_in_mins, seen, rating)
