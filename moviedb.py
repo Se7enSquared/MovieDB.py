@@ -144,9 +144,9 @@ def perform_special_search(type):
 
 
 def delete_movie(movie_collection):
-    '''
-    User interface to remove a movie from the database
-    '''
+    
+    ''' User interface to remove a movie from the database '''
+    
     title = input('What movie do you want to delete? (Type the whole title'
                   'exactly as it is found in the database): ')
     
@@ -164,6 +164,7 @@ if __name__ == "__main__":
                                '3': 'Delete Movie', '4': 'View Collection\n\n'}, start_message='\n'
                               '******************************\n'
                               'Welcome to your movie Database\n')
+        
         main_menu.show_menu()
         choice = int(main_menu.get_choice())
 
@@ -178,8 +179,10 @@ if __name__ == "__main__":
         
         elif choice == 4:
             movie_collection.__str__()    
+            
         else:
             print('Invalid input')
+
 
         continue_app = input('\n\nDo you want another operation? y/n: \n')
 
