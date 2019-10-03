@@ -6,21 +6,7 @@ import Movie
 import Menu
 
 
-def menu_choice():
-    '''
-    Collects the user's choice from the menu.
-    '''
-    while True:
-        try:
-            choice = int(input('What do you want to do? (1, 2, 3): '))
-            if choice in [1, 2, 3]:
-                break
-            else:
-                print('You must choose 1, 2, or 3')
-                continue
-        except:
-            print('Input must be a number between 1 & 3')
-    return choice
+
 
 
 def create_movie(movie_collection):
