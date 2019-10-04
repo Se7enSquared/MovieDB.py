@@ -62,8 +62,11 @@ class MovieCollection:
 
     def __str__(self):
         for movie in self.movies:
-            print('\nTitle: ' + movie['title'] + '\nGenre: ' + \
-                  movie['genre'] + '\nYear: ' + movie['year'] + \
-                  '\nDuration: ' + str(movie['duration_in_mins']) + \
-                  '\nSeen: ' + str(movie['seen']) + '\nYour Rating: ' \
-                  + str(movie['rating']))
+            if self.movies == None:
+                print('The collection is empty')
+            else:
+                print('\nTitle: ' + movie['title'] + '\nGenre: ' + \
+                      movie['genre'] + '\nYear: ' + str(movie['year']) + \
+                      '\nDuration: ' + str(movie['duration_in_mins']) + \
+                      '\nSeen: ' + str(movie['seen']) + '\nYour Rating: ' \
+                      + str(movie['rating']))

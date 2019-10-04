@@ -46,6 +46,9 @@ def create_movie(movie_collection):
             print('\nPlease type Yes or No')
     rating = ''
     while True:
+        # rating is optional
+        if rating == None:
+            break
         try: 
             rating = int(input('Rating 1-5 (optional): '))
         except:
@@ -124,7 +127,7 @@ def search_for_movie(movie_collection):
             
             for movie in found_movies:
                 for key, value in movie.items():
-                    print(key.title() + ': ' + value)
+                    print(key.title() + ': ' + str(value))
                 print('')
 
 
@@ -217,6 +220,8 @@ if __name__ == "__main__":
             delete_movie(movie_collection)
         
         elif choice == 4:
+            print('\n' + '*'*20)
+            print('Your Collection')
             movie_collection.__str__()    
             
         else:
