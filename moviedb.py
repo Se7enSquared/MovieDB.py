@@ -204,8 +204,8 @@ if __name__ == "__main__":
 
         main_menu = Menu.Menu({'1': 'Add movie', '2': 'Find Movie',
                                '3': 'Delete Movie', '4': 'View Collection\n\n'}, start_message='\n'
-                              '******************************\n'
-                              'Welcome to your movie Database\n')
+                              + '*' * 30 + '\n'
+                              'Welcome to your movie Database\n' + '*'*30)
         
         main_menu.show_menu()
         choice = int(main_menu.get_choice())
