@@ -4,6 +4,11 @@ class MovieCollection:
     def __init__(self):
         self.movies = []
 
+    @staticmethod
+    def load_collection(collection):
+        movies = collection
+        return collection
+
     def add_movie(self, movie):
         self.movies.append(movie)
 

@@ -1,7 +1,7 @@
 {
-    "python.pythonPath": "C:\\Users\\gray\\AppData\\Local\\Programs\\Python\\Python37-32\\python.exe",
-    "python.linting.pylintEnabled": true,
-    "python.linting.pep8Enabled": false,
+    "python.pythonPath": "C:\\Users\\analy\\AppData\\Local\\Programs\\Python\\Python37-32\\python.exe",
+    "python.linting.pylintEnabled": false,
+    "python.linting.pep8Enabled": true,
     "python.linting.enabled": true,
     "python.linting.banditEnabled": false
 }
