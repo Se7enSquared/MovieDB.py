@@ -1,6 +1,6 @@
 class MovieCollection:
     movies = []
-    
+
     def __init__(self):
         self.movies = []
 
@@ -63,7 +63,6 @@ class MovieCollection:
             else:
                 print(title + ' was not found in the database. Check the title'
                       ' name and try again.\n')
-
 
     def __str__(self):
         for movie in self.movies:
