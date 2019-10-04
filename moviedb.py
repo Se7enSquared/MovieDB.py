@@ -4,6 +4,7 @@
 import MovieCollection as mc
 import Movie
 import Menu
+import pickle
 
 def create_movie(movie_collection):
     ''' gets movie information from the user before passing it to
@@ -203,7 +204,7 @@ if __name__ == "__main__":
     while True:
 
         main_menu = Menu.Menu({'1': 'Add movie', '2': 'Find Movie',
-                               '3': 'Delete Movie', '4': 'View Collection\n\n'}, start_message='\n'
+                               '3': 'Delete Movie', '4': 'View Collection', '5': 'Save collection', '6': 'Load Collection\n\n'}, start_message='\n'
                               + '*' * 30 + '\n'
                               'Welcome to your movie Database\n' + '*'*30)
         
@@ -223,6 +224,10 @@ if __name__ == "__main__":
             print('\n' + '*'*20)
             print('Your Collection')
             movie_collection.__str__()    
+        elif choice == 5:
+            pickle.dump(movie_collection, open('moviecollection.txt', 'wb'))
+        elif choice == 6:
+            movie_collection = pickle.load(open('moviecollection.txt', 'rb'))
             
         else:
             print('Invalid input')
