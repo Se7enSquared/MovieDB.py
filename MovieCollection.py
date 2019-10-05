@@ -75,4 +75,4 @@ class MovieCollection:
                       + str(movie['rating']))
 
     def __repr__(self):
-        return f'<{self.class.__name__} with {len(self.movies)} items>'
+        return f'<{self.__class__.__name__} with {len(self.movies)} items>'

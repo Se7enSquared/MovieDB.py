@@ -29,3 +29,5 @@ class Menu:
             
         return choice
 
+    def __repr__(self):
+        return f'<{self.__class__.__name__} containing {len(self.option_dict)} options>'

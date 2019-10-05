@@ -36,4 +36,4 @@ class Movie:
                 str(self.rating)
     
     def __repr__(self):
-        return f'<{self.class.__name__}: {self.title}>'
+        return f'<{self.__class__.__name__}: {self.title}>'
