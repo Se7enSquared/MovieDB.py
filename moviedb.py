@@ -1,6 +1,3 @@
-# todo:make menu into a class which can build a menu
-# todo:add comments
-
 import MovieCollection as mc
 import Movie
 import Menu
@@ -48,11 +45,13 @@ def create_movie(movie_collection):
             print('\nPlease type Yes or No')
     rating = ''
     while True:
-        # rating is optional
-        if rating is None:
-            break
+        
         try:
-            rating = int(input('Rating 1-5 (optional):'))
+            rating = input('Rating 1-5:')
+            # rating is optional
+            if rating == '':
+                break
+            rating = int(rating)
         except:
             print('Must be an integer')
 
