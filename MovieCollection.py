@@ -53,9 +53,8 @@ class MovieCollection:
             return found_movies
 
     def delete_movie(self, title):
-        '''
-        removes a movie dictionary object from the movie collection object
-        '''
+        ''' removes a movie dictionary object from the movie 
+        collection object '''
         for i in range(len(self.movies)):
             if self.movies[i]['title'] == title:
                 del self.movies[i]
@@ -74,3 +73,6 @@ class MovieCollection:
                       '\nDuration: ' + str(movie['duration_in_mins']) + \
                       '\nSeen: ' + str(movie['seen']) + '\nYour Rating: ' \
                       + str(movie['rating']))
+
+    def __repr__(self):
+        return f'<{self.class.__name__} with {len(self.movies)} items>'

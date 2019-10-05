@@ -1,4 +1,4 @@
-class Menu():
+class Menu:
 
     def __init__(self, option_dict, start_message=None, end_message=None):
         self.start_message = start_message
@@ -6,7 +6,7 @@ class Menu():
         self.option_dict = option_dict
 
     def show_menu(self):
-
+        ''' Displays a menu to the screen '''
         if self.start_message:
             print(self.start_message + '\n')
 
@@ -17,6 +17,7 @@ class Menu():
             print('\n' + self.end_message)
 
     def get_choice(self):
+        '''Gets menu choice from the user and returns it'''
         while True:
             choice = input('Your choice: ')
             
@@ -27,3 +28,4 @@ class Menu():
                 break
             
         return choice
+

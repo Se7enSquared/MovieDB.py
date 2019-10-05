@@ -1,5 +1,6 @@
 import MovieCollection as mc
 
+
 class Movie:
 
     def __init__(self, movie_collection, title, genre, year, duration_in_mins, seen='No',
@@ -33,3 +34,6 @@ class Movie:
                 + str(self.year) + '\nDuration: ' + str(self.duration_in_mins) + \
                 '\nSeen: ' + self.seen + '\nYour Rating: ' + \
                 str(self.rating)
+    
+    def __repr__(self):
+        return f'<{self.class.__name__}: {self.title}>'
