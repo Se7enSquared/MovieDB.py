@@ -2,7 +2,7 @@ from MovieCollection import MovieCollection as mc
 from Movie import Movie
 from Menu import Menu
 import pickle
-from os import path
+import os
 
 
 def create_movie(movie_collection):
@@ -198,7 +198,7 @@ def delete_movie(movie_collection):
 if __name__ == "__main__":
 
     # init new list of movies
-    if path.isfile('./moviecollection.txt'):
+    if os.path.isfile('./moviecollection.txt'):
         load = input('Do you wish to load the existing collection? y/n')
 
         if load[0].lower() == 'y':
