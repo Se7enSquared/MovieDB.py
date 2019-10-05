@@ -235,10 +235,13 @@ if __name__ == "__main__":
             print('Your Collection')
             movie_collection.__str__()    
         elif choice == 5:
-            pickle.dump(movie_collection, open('moviecollection.txt', 'wb'))
+            f = open('moviecollection.txt', 'wb')
+            pickle.dump(movie_collection, f)
+            f.close()
         elif choice == 6:
-            movie_collection = mc.load_collection(pickle.load(open(
-                'moviecollection.txt', 'rb')))
+            f = open('moviecollection.txt', 'rb')
+            movie_collection = mc.load_collection(pickle.load(f))
+            f.close()
         elif choice == 7:
             print('\n' + '*'*20 + '\nClosing application')
             break
