@@ -8,6 +8,11 @@ class MovieCollection:
     def load_collection(cls, collection):
         cls.movies = collection
         return collection
+    
+    @classmethod
+    def save_collection(cls, collection):
+        pickle.dump(collection, open('moviecollection.txt', 'wb'))
+        print('*'*20 + '\nCollection saved.')
 
     def add_movie(self, movie):
         self.movies.append(movie)

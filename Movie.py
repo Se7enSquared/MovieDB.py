@@ -1,4 +1,4 @@
-import MovieCollection as mc
+from MovieCollection import MovieCollection as mc
 
 
 class Movie:
@@ -21,7 +21,7 @@ class Movie:
         movie['seen'] = self.seen
         movie['rating'] = self.rating
 
-        mc.MovieCollection.add_movie(movie_collection, movie)
+        mc.add_movie(movie_collection, movie)
         
         print('Movie added: ')
         print(movie)

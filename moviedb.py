@@ -1,7 +1,8 @@
-import MovieCollection as mc
-import Movie
-import Menu
+from MovieCollection import MovieCollection as mc
+from Movie import Movie
+from Menu import Menu
 import pickle
+from os import path
 
 
 def create_movie(movie_collection):
@@ -60,8 +61,8 @@ def create_movie(movie_collection):
         else:
             print('\nRating must be a number between 1 & 5')
 
-    new_movie = Movie.Movie(movie_collection, title, genre, year, 
-                            duration_in_mins, seen, rating)
+    new_movie = Movie(movie_collection, title, genre, year, 
+                      duration_in_mins, seen, rating)
 
     print('\n*************\nMovie Added:\n\n\n')
     print(new_movie)
@@ -76,8 +77,8 @@ def search_for_movie(movie_collection):
 
     # finds the correct dictionary key in the movie collection based
     # on the number the user inputs
-    criteria_dict = {1:'title', 2:'genre', 3:'year',
-                     4:'duration_in_mins', 5:'seen', 6:'rating'}
+    criteria_dict = {1: 'title', 2: 'genre', 3: 'year',
+                     4: 'duration_in_mins', 5: 'seen', 6: 'rating'}
 
     # a special_search is a search where an operator is needed (such as
     # finding all movies longer than 2 hours)
@@ -88,10 +89,10 @@ def search_for_movie(movie_collection):
     while criteria not in range(1, 7):
 
         # Construct a new menu object
-        criteria_menu = Menu.Menu({'1':  'Title', '2':  'Genre', '3': 'Year', 
-                                   '4': 'Duration', '5': 'Seen', '6': 
-                                   'rating'}, start_message='What do you want '
-                                   'to search by: ')
+        criteria_menu = Menu({'1':  'Title', '2':  'Genre', '3': 'Year', 
+                              '4': 'Duration', '5': 'Seen', '6': 
+                              'rating'}, start_message='What do you want '
+                             'to search by: ')
         criteria_menu.show_menu()
         criteria = int(input())
 
@@ -109,7 +110,7 @@ def search_for_movie(movie_collection):
         elif criteria == 5:
             operator = None
             value = input('Seen (yes) or not (no):')
-        elif criteria ==  6:
+        elif criteria == 6:
             value, operator, special_search = perform_special_search('rating')
         else:
             print('Invalid selection')
@@ -197,16 +198,25 @@ def delete_movie(movie_collection):
 if __name__ == "__main__":
 
     # init new list of movies
-    movie_collection = mc.MovieCollection()
+    if path.isfile('./moviecollection.txt'):
+        load = input('Do you wish to load the existing collection? y/n')
+
+        if load[0].lower() == 'y':
+            movie_collection = mc.load_collection(pickle.load(
+                open('moviecollection.txt', 'rb')))
+        else:
+            movie_collection = mc()
+    else:
+        movie_collection = mc()
 
     while True:
 
-        main_menu = Menu.Menu({'1': 'Add movie', '2': 'Find Movie',
-                               '3': 'Delete Movie', '4': 'View Collection',
-                               '5': 'Save collection', '6': 'Load Collection',
-                               '7': 'Quit application\n\n'},
-                               start_message='\n' + '*' * 30 + '\n'
-                              'Welcome to your movie Database\n' + '*'*30)
+        main_menu = Menu({'1': 'Add movie', '2': 'Find Movie',
+                          '3': 'Delete Movie', '4': 'View Collection',
+                          '5': 'Save collection', '6': 'Load Collection',
+                          '7': 'Quit application\n\n'}, 
+                         start_message='\n' + '*' * 30 + '\n'
+                         'Welcome to your movie Database\n' + '*'*30)
 
         main_menu.show_menu()
         choice = int(main_menu.get_choice())
@@ -227,7 +237,8 @@ if __name__ == "__main__":
         elif choice == 5:
             pickle.dump(movie_collection, open('moviecollection.txt', 'wb'))
         elif choice == 6:
-            movie_collection = mc.MovieCollection.load_collection(pickle.load(open('moviecollection.txt', 'rb')))
+            movie_collection = mc.load_collection(pickle.load(open(
+                'moviecollection.txt', 'rb')))
         elif choice == 7:
             print('\n' + '*'*20 + '\nClosing application')
             break
