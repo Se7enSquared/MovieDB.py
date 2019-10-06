@@ -22,7 +22,7 @@ class Movie:
         movie['rating'] = self.rating
 
         mc.add_movie(movie_collection, movie)
-        
+   
         print('Movie added: ')
         print(movie)
 
@@ -34,6 +34,6 @@ class Movie:
                 + str(self.year) + '\nDuration: ' + str(self.duration_in_mins) + \
                 '\nSeen: ' + self.seen + '\nYour Rating: ' + \
                 str(self.rating)
-    
+                
     def __repr__(self):
         return f'<{self.__class__.__name__}: {self.title}>'

@@ -8,7 +8,7 @@ class MovieCollection:
     def load_collection(cls, collection):
         cls.movies = collection
         return collection
-    
+
     @classmethod
     def save_collection(cls, collection):
         f = open('moviecollection.txt', 'wb')
@@ -37,7 +37,7 @@ class MovieCollection:
         '''
 
         found_movies = []
-        
+
         if not operator:
             for movie in self.movies:
                 if movie[criteria] == value:
@@ -73,13 +73,13 @@ class MovieCollection:
 
     def __str__(self):
         for movie in self.movies:
-            if self.movies == None:
+            if self.movies is None:
                 print('The collection is empty')
             else:
-                print('\nTitle: ' + movie['title'] + '\nGenre: ' + \
-                      movie['genre'] + '\nYear: ' + str(movie['year']) + \
-                      '\nDuration: ' + str(movie['duration_in_mins']) + \
-                      '\nSeen: ' + str(movie['seen']) + '\nYour Rating: ' \
+                print('\nTitle: ' + movie['title'] + '\nGenre: ' +
+                      movie['genre'] + '\nYear: ' + str(movie['year']) +
+                      '\nDuration: ' + str(movie['duration_in_mins']) +
+                      '\nSeen: ' + str(movie['seen']) + '\nYour Rating: '
                       + str(movie['rating']))
 
     def __repr__(self):
