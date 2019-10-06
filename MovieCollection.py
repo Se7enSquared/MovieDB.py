@@ -66,6 +66,7 @@ class MovieCollection:
             if self.movies[i]['title'] == title:
                 del self.movies[i]
                 print(title + ' was deleted from the database\n')
+                break
             else:
                 print(title + ' was not found in the database. Check the title'
                       ' name and try again.\n')
