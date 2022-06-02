@@ -11,10 +11,9 @@ class MovieCollection:
 
     @classmethod
     def save_collection(cls, collection):
-        f = open('moviecollection.txt', 'wb')
-        pickle.dump(collection, f)
-        print('*'*20 + '\nCollection saved.')
-        f.close()
+        with open('moviecollection.txt', 'wb') as f:
+            pickle.dump(collection, f)
+            print('*'*20 + '\nCollection saved.')
 
     def add_movie(self, movie):
         self.movies.append(movie)
@@ -39,21 +38,12 @@ class MovieCollection:
         found_movies = []
 
         if not operator:
-            for movie in self.movies:
-                if movie[criteria] == value:
-                    found_movies.append(movie)
+            found_movies.extend(movie for movie in self.movies if movie[criteria] == value)
         elif operator == 'greater':
-            for movie in self.movies:
-                if movie[criteria] >= value:
-                    found_movies.append(movie)
-
-            else:
-                return found_movies
+            found_movies.extend(movie for movie in self.movies if movie[criteria] >= value)
+            return found_movies
         else:
-            for movie in self.movies:
-                if movie[criteria] <= value:
-                    found_movies.append(movie)
-
+            found_movies.extend(movie for movie in self.movies if movie[criteria] <= value)
         if not found_movies:
             print('\nMovie not found\n')
         else:

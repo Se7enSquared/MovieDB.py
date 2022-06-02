@@ -11,7 +11,7 @@ class Menu:
             print(self.start_message + '\n')
 
         for option, description in self.option_dict.items():
-            print(option + '. ' + description)
+            print(f'{option}. {description}')
 
         if self.end_message:
             print('\n' + self.end_message)
@@ -20,13 +20,12 @@ class Menu:
         '''Gets menu choice from the user and returns it'''
         while True:
             choice = input('Your choice: ')
-            
-            if choice not in self.option_dict.keys():
-                print('Invalid choice')
-                continue
-            else:
+
+            if choice in self.option_dict.keys():
                 break
-            
+
+            print('Invalid choice')
+            continue
         return choice
 
     def __repr__(self):
