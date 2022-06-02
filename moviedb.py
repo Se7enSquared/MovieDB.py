@@ -128,7 +128,7 @@ def search_for_movie(movie_collection):
 
             for movie in found_movies:
                 for key, value in movie.items():
-                    print(key.title() + ': ' + str(value))
+                    print(f'{key.title()}: {str(value)}')
                 print('')
 
 
@@ -166,13 +166,24 @@ def perform_special_search(type):
 
         if search_type == 1:
             operator = None
-            value = input('Enter the ' + type + 'you\'d like to search for:')
+            value = input(f'Enter the {type}' + 'you\'d like to search for:')
 
         elif search_type == 2:
             special_search = True
             operator = 'greater'
-            value = input('Enter the lowest ' + type + ' (returns' + type +
-                          '>= that ' + type + '):')
+            value = input(
+                (
+                    (
+                        (
+                            f'Enter the lowest {type} (returns{type}'
+                            + '>= that '
+                        )
+                        + type
+                    )
+                    + '):'
+                )
+            )
+
 
         elif search_type == 3:
             special_search = True
@@ -233,15 +244,13 @@ if __name__ == "__main__":
         elif choice == 4:
             print('\n' + '*'*20)
             print('Your Collection')
-            movie_collection.__str__()    
+            movie_collection.__str__()
         elif choice == 5:
-            f = open('moviecollection.txt', 'wb')
-            pickle.dump(movie_collection, f)
-            f.close()
+            with open('moviecollection.txt', 'wb') as f:
+                pickle.dump(movie_collection, f)
         elif choice == 6:
-            f = open('moviecollection.txt', 'rb')
-            movie_collection = mc.load_collection(pickle.load(f))
-            f.close()
+            with open('moviecollection.txt', 'rb') as f:
+                movie_collection = mc.load_collection(pickle.load(f))
         elif choice == 7:
             print('\n' + '*'*20 + '\nClosing application')
             break
